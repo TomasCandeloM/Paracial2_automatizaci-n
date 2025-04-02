@@ -174,8 +174,16 @@ Con esto terminaríamos el esquemático del Ladder dentro del codesys, ahora pas
 
 ### Simulación con un HMI 
 
+Una vez el esquemático del Ladder estaba listo, se agrego un objeto de visualización para el diseño de la simulación con uso de un HMI (Interfaz Hombre-Maquina) el cual consiste en una interfaz para demostrar como sería el funcionamiento de la solución y como una persona interactúa con este mismo. 
+
+Como el sistema que se desarrollo consistía en la preparación de una taza de café a través de llenar un tanque de mezclado con agua y café por separado para luego mezclaros y dispensarlo, se opto por desarrollar un HMI que representara los 3 tanques por separado para que luego se unificara su funcionamiento y mostrar una animación de como seria la lógica implementada. 
+
+El resultado final del HMI fue el siguiente:
 
 
+En este podemos ver los 3 tanques en orden según como se irán llenando o dispensando el liquido para ejecutar el sistema, en la parte superior podemos ver el tanque de agua y de café que dispensan su contenido, primero el tanque de agua dispensa durante 5 segundos, como podemos ver en la imagen: 
+
+Una vez el de agua termino de llenarse empieza a dispensar el de café durante 3 segundos, como se ve en la imagen
 
 ## Implementación del sistema en OpenPLC
 

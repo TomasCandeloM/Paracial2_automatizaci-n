@@ -123,6 +123,11 @@ Después de este último proceso, el sistema se reinicia y la secuencia comienza
 
 ### Diagrama eléctrico
 
+A continuación, realizamos el diagrama eléctrico para planificar las conexiones de nuestra prueba real una vez implementado el sistema. Para esto, tuvimos en cuenta que los actuadores de más corriente, como las bombas y el motor, tenían que conectarse a la corriente mediante un puente H, que estará alimentado por una fuente de poder aparte. 
+
+Aparte de esto, solo se tomó en cuenta las direcciones lógicas que se asignarán a las salidas y entradas de nuestro Arduino Uno, y que la alimentación a este vendrá de su puerto JACK. Teniendo esto en cuenta, el diagrama eléctrico es el siguiente:
+
+![Diagrama eléctrico](Images/diagrama_electrico.png)
 
 ### Diseño Ladder
 

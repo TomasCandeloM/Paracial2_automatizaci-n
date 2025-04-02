@@ -4,11 +4,11 @@
 
 Tomas Candelo Montoya
 
-Juan José Cifuentes Cuellar
+Juan José Cifuente Cuellar
 
-Ivan Gutierrez Espinosa
+Ivan Alejandro Gutierrez 
 
-Melissa Pérez Patiño
+Melissa Perez Patiño
 
 **** 
 
@@ -20,21 +20,20 @@ Este diseño debe ser realizado en lenguaje Ladder e implementado a través de O
 
 Especificaciones del Sistema
 
-Para la implementación, se consideraron los siguientes puntos:
-	•	Inicio del proceso: El sistema debe activarse mediante un interruptor.
-	•	Preparación de la mezcla: La máquina debe verter automáticamente el café molido y el agua caliente en el recipiente de mezcla.
-	•	Activación del actuador de mezcla: Se debe activar durante un minuto después de haber recibido el agua y el café por separado.
-	•	Dispensado del café: Una vez completada la mezcla, el café listo se vierte en un vaso.
-	•	Finalización y conteo: Al terminar de servir el café, la máquina se apaga y el contador de vasos preparados aumenta en uno.
+Para la implementación, se consideraron los siguientes puntos: • Inicio del proceso: El sistema debe activarse mediante un interruptor. 
+- Preparación de la mezcla: La máquina debe verter automáticamente el café molido y el agua caliente en el recipiente de mezcla. 
+- Activación del actuador de mezcla: Se debe activar durante un minuto después de haber recibido el agua y el café por separado. 
+- Dispensado del café: Una vez completada la mezcla, el café listo se vierte en un vaso. 
+- Finalización y conteo: Al terminar de servir el café, la máquina se apaga y el contador de vasos preparados aumenta en uno.
 
 En este documento, se detallará el proceso de ideación, diseño e implementación de nuestra solución para la máquina de café.
 
 # Diseño del circuito lógico para el proceso automatizado 
 
 ## Diseño Lógico 
-Para el diseño lógico de la solución lo primero que se hizo fue la definición de las posibles variables necesarias a implementar, para posteriormente implementarlas en un diagrma secuencial. En total, se realizaron dos definiciones de variables, la inicial sirvió para definir los requerimeintos mínimos que tendrían nuestro proyecto, para poder pasar a Codesys y verificar si este primer borrador de variables cumple con el funcionamiento. 
+Para el diseño lógico de la solución lo primero que se hizo fue la definición de las posibles variables necesarias a implementar para posteriormente implementarlas en un diagrama secuencial. En total se realizaron 2 definiciones de variables, la inicial sirvió para definir los requerimientos mínimos que tendría nuestro proyecto, para poder pasar a codesys y verificar si este primer borrador de variables cumpliese con el funcionamiento. 
 
-Una vez se implementó en Codesys, a causa de que hacían falta variables necesarias para la implementación de la solución se realizó una actualización de esta lista de variables con todas las variables que ya se tenían y las que tuvieron que ser creadas, tanto para el funcionamiento real de la solución, como para la simulación que posteriormente sería realizada en Codesys a través de un HMI (Human Machine Interaction). 
+Una vez se implemento en codesys a cusa de que hacían falta variables necesarias para la implementación de la solución se realizo una actualización de esta lista de variables con todas las variables que ya se tenían y las que tuvieron que ser creadas, tanto para el funcionamiento real de la solución, como para la simulación que posteriormente seria realizada en codesys a través de un HMI. 
 
 La lista de variables final que se utilizaron en nuestra solución fueron las siguientes:
 
@@ -75,7 +74,7 @@ La lista de variables final que se utilizaron en nuestra solución fueron las si
 | IR_READY             | [Relay]   | BOOL   | Relay interno que indica que el proceso cuenta con las condiciones iniciales necesarias para empezar
 | IR_Contador          | [Relay]   | BOOL   | Relay interno que envia el flanco de subida que suma 1 a la variable contador
 
-Ahora, además de estas variables que son las necesarias para el funcionamiento de la solución, también se implementaron variables que fueron necesarias para la ejecución de la animación del HMI, las cuales fueron las siguientes: 
+Ahora, además de estas variables que son las necesarias para el funcionamiento de la solución, también se implementaron variables que fueron necesarias para la ejecución de la animación del HMI, las cuales fueron las siguientes:
 
 | Nombre                 | Atributo  | Tipo  | Comentario                                                               |
 |------------------------|----------|------|---------------------------------------------------------------------------|
@@ -89,10 +88,10 @@ Ahora, además de estas variables que son las necesarias para el funcionamiento 
 | HMI_Reset             | [HMI]    | BOOL | Representa el proceso de retirar el vaso del lugar, el cual se ve representado en el HMI como retirar el líquido del vaso |
 
 
-Ahora, con todas estas variables  podemos pasar a los siguientes pasos de la fase de diseño de nuestra solución. 
+Ahora, con todas estas variables podemos pasar a los siguientes pasos de la fase de diseño de nuestra solución.
 
 ### Diagrama secuencial 
-Este diagrama es el más importante de todos, es el que nos permitió entender cómo nuestras variables se relacionarán a modo de condición o de proceso dentro de nuestra solución. Este diagrama tambien fue realizado en dos fases diferentes, la primera donde, con las variables iniciales que teníamos, se planteó la secuencialidad que seguiria la cafetera, el orden en el que se realizarán diferentes verificaciones y cuando, la unión de diferentes condiciones se de, se activarán los diferentes procesos de la solución. La segunda opción fue una modificación a los inputs y outputs involucrados en el diagrama, la lógica como tal no cambió, solo cambiaron en que momento se activarán ciertos inputs y como se verían afectados ciertos outpus del sistema. 
+Este diagrama es el más importante de todos, es el que nos permitió entender cómo nuestras variables se relacionarán a modo de condición o de proceso dentro de nuestra solución. Este diagrama también fue realizado en dos fases diferentes, la primera donde, con las variables iniciales que teníamos, se planteó la secuencialidad que seguiría la cafetera, el orden en el que se realizarán diferentes verificaciones y cuando, la unión de diferentes condiciones se de, se activarán los diferentes procesos de la solución. La segunda opción fue una modificación a los inputs y outputs involucrados en el diagrama, la lógica como tal no cambió, solo cambiaron en que momento se activarán ciertos inputs y como se verían afectados ciertos outpus del sistema. 
 
 El diagrama secuencial definitivo que se desarrolló fue el siguiente: 
 
@@ -100,42 +99,81 @@ El diagrama secuencial definitivo que se desarrolló fue el siguiente:
 
 En este esquema, podemos ver los diferentes procesos involucrados en la preparación de un vaso de café. Estos pueden resumirse de la siguiente manera:
 
-- **S000**: Es el proceso previo a cualquier operación. Su función es reiniciar todos los actuadores e indicadores de estado del sistema, garantizando que todo esté en condiciones iniciales antes de comenzar.
+- *S000*: Es el proceso previo a cualquier operación. Su función es reiniciar todos los actuadores e indicadores de estado del sistema, garantizando que todo esté en condiciones iniciales antes de comenzar.
 
-- **S001**: Es el primer proceso y se encarga únicamente de encender el indicador que confirma la detección de agua en el tanque por parte del sensor.
+- *S001*: Es el primer proceso y se encarga únicamente de encender el indicador que confirma la detección de agua en el tanque por parte del sensor.
 
-- **S002**: Similar al proceso anterior, pero en este caso verifica la presencia de café molido en su respectivo tanque.
+- *S002*: Similar al proceso anterior, pero en este caso verifica la presencia de café molido en su respectivo tanque.
 
-- **S003**: También es similar al anterior, pero aquí se asegura que haya un vaso colocado en el espacio designado antes de iniciar el proceso.
+- *S003*: También es similar al anterior, pero aquí se asegura que haya un vaso colocado en el espacio designado antes de iniciar el proceso.
 
-- **S004**: Una vez completadas todas las verificaciones de contenido, se puede accionar el botón de encendido, lo que inicia el proceso de mezcla del café. En esta etapa, se activan los indicadores de encendido de la máquina, el actuador del tanque de agua para permitir el flujo hacia el tanque de mezclado y el temporizador que controlará el tiempo de activación de este actuador.
+- *S004*: Una vez completadas todas las verificaciones de contenido, se puede accionar el botón de encendido, lo que inicia el proceso de mezcla del café. En esta etapa, se activan los indicadores de encendido de la máquina, el actuador del tanque de agua para permitir el flujo hacia el tanque de mezclado y el temporizador que controlará el tiempo de activación de este actuador.
 
-- **S005**: Este proceso se encarga de verter el contenido del tanque de café en el tanque de mezclado. Se activa cuando finaliza el temporizador del agua, lo que apaga el actuador del tanque de agua y enciende el actuador del tanque de café junto con su temporizador.
+- *S005*: Este proceso se encarga de verter el contenido del tanque de café en el tanque de mezclado. Se activa cuando finaliza el temporizador del agua, lo que apaga el actuador del tanque de agua y enciende el actuador del tanque de café junto con su temporizador.
 
-- **S006**: Este proceso activará la etapa de mezclado del contenido en el momento que el timmer del tanque de café se termine, en este proceso se hara algo similar al caso anterior donde se apaga el actuador del tanque del café y enciende el actuador y timer del tanque de mezclado.
+- *S006*: Este proceso activará la etapa de mezclado del contenido en el momento que el timer del tanque de café se termine, en este proceso se hará algo similar al caso anterior donde se apaga el actuador del tanque del café y enciende el actuador y timer del tanque de mezclado.
 
-- **S007**: Este será el último proceso en la preparación de un vaso de café, ya que consiste en el dispensado del líquido mezclado en el vaso. Se activará cuando finalice el temporizador de un minuto del tanque de mezclado. En ese momento, el actuador del tanque se apagará, y se activarán el actuador y el temporizador encargados de servir el líquido.
+- *S007*: Este será el último proceso en la preparación de un vaso de café, ya que consiste en el dispensado del líquido mezclado en el vaso. Se activará cuando finalice el temporizador de un minuto del tanque de mezclado. En ese momento, el actuador del tanque se apagará, y se activarán el actuador y el temporizador encargados de servir el líquido.
 
-- **S008**: Cuando termina el proceso de dispensado lo unico que se realiza en esta etapa es el reinicio del actuador del dispensador y la activación del rele que indica que el proceso está listo.
+- *S008*: Cuando termina el proceso de dispensado lo único que se realiza en esta etapa es el reinicio del actuador del dispensador y la activación del relé que indica que el proceso está listo.
 
-- **S009**: Con la activación del relé IR_DONE, se lleva a cabo el proceso final de la cafetera. En esta etapa, se realizan diferentes acciones posteriores a la dispensación del café. Primero, se apagan el relé y el indicador de funcionamiento. Luego, se activa el indicador de finalización del proceso. Finalmente, mediante el relé del contador, se genera un pulso que incrementa en 1 la variable del contador de vasos preparados en el día.
+- *S009*: Con la activación del relé IR_DONE, se lleva a cabo el proceso final de la cafetera. En esta etapa, se realizan diferentes acciones posteriores a la dispensación del café. Primero, se apagan el relé y el indicador de funcionamiento. Luego, se activa el indicador de finalización del proceso. Finalmente, mediante el relé del contador, se genera un pulso que incrementa en 1 la variable del contador de vasos preparados en el día.
 
 Después de este último proceso, el sistema se reinicia y la secuencia comienza nuevamente cuando se coloca un nuevo vaso.
-
 
 ### Diagrama electrico
 
 
 ### Diseño Ladder
 
+Ahora que se realizaron estos dos diagramas para el diseño de la solución se puede hacer un cambio de lógixa para representar el sistema en una lógica Ladder, para esto simplemente tomamos los pasos, condiciones, estados y resultados de cada uno de los procesos definidos en el diagrama secuencial y luego pasarlo a código Ladder para asi poder implementarlo en Codesys y hacer su simulación y animación en el HMI del mismo. 
 
 ## Implementación en CodeSys
 
+na vez el Ladder esta listo se realizó la implementación y simulación del diseño usado Codesys, para este apartado se realizaron las actividades de e esquemático del Ladder y luego la simulación del mismo con un HMI que muestre su funcionamiento a través de una animación.
 
 ### Esquemático Ladder del diseño
 
+Una vez estamos en el software en el plano PLC_PRG se añadió el primer contacto para habilitar la pestaña de variables globales y asi crear todas las variables que presentamos en el excel con su respectivo tipo de variable. 
+
+Con las variables configuradas en el Codesys se construyó el esquemático siguiendo los procesos definidos en el diagrama secuencial, para este se realizaron un total de 23 redes para el completo funcionamiento tanto para la lógica como para el HMI que sera implementado más adelante. 
+
+Para la primer red si implemento el proceso S000 encargado del reinicio de todos los actuadores del sistema y las variables del HMI encargados de mostrar que tanto el agua como el café han sido depositados en el mezclador
+
+![Primera red del esquemático Ladder en codesys](Images/Red1_codesys.png)
+
+Las siguientes 3 redes se encargan de asignar la funcionalidad de los sensores del agua, el café y el vaso ya que en el HMI no tenemos sensores para representar su funcionalidad, entonces usaremos switches para representar si están sensando algo o no
+
+![Redes 2, 3 y 4 del esquemático Ladder en codesys](Images/Red_234_codesys.png)
+
+Ahora que tenemos los estados de los sensores configurados se configuro el esquemático de estos sensores, donde cuando sensan que hay contenido en sus respectivos tanques activa sus leds y relés. 
+
+![Redes 5, 6 y 7 del esquemático Ladder en codesys](Images/Red_567_codesys.png)
+
+Las siguientes redes son las configuraciones iniciales finales encargadas de activar el relé de preparado para iniciar el sistema cuando los estados de los relés de los sensores cumplen con su condición, iniciar el relé de encendido cuando el sistema esta listo y el botón de encendido se acciona con un flanco de subida y el reinicio de todos los estados cuando detecta un flanco de subida en el botón de stop
+
+![Redes 8, 9 y 10 del esquemático Ladder en codesys](Images/Red_8910_codesys.png)
+
+La siguiente red sera para el HMI donde representara la acción de retirar el vaso del sistema, lo cual reinicia completamente el sistema
+
+![Rede 11 del esquemático Ladder en codesys](Images/Red_11_codesys.png)
+
+En la siguiente secuencia de bloques podemos ver representado los procesos S004, S005 y S006 que corresponde a pasar el agua al tanque de mezclado por medio de un timer y luego activar el proceso del café cuando el timer del agua termina, cuando el timer del café termina prepara el proceso de mezcla. 
+
+![Redes 12, 13, 14, 15 y 16 del esquemático Ladder en codesys](Images/Red_12_16_codesys.png)
+
+Las siguientes 3 redes corresponden al proceso S007 y S008 encargados del proceso de dispensar la mezcla en el vaso, tenemos primero el contador del proceso de mezcla el cual una vez termina reinicia los estados del HMI del tanque de mezcla y termina el timer, con el timer terminado la siguiente red se encarga de dar inicio al proceso de dispensado, la ultima red cuenta con el timer de dispensado el cual dará paso a la fase de finalización y conteo
+
+![Redes 17, 18 y 19 del esquemático Ladder en codesys](Images/Red_17_19_codesys.png)
+
+Finalmente tenemos las redes encargadas del proceso de finalización del sistema, donde en la primera tenemos el reinicio del actuador del dispensador y la activación del relé DONE, este relé activara los indicadores de que finalizo el proceso y activa el relé del contador, donde este ultimo aumentara en uno el conteo de vasos preparados cuando recibe un flanco de subida. Por ultimo, la red 24 unicamente tiene la configuración del botón reset del contador, para mostrar la funcionalidad de reinicio cada 24 horas del mismo. 
+
+![Redes 20, 21, 22, 23 y 24 del esquemático Ladder en codesys](Images/Red_20_24_codesys.png)
+
+Con esto terminaríamos el esquemático del Ladder dentro del codesys, ahora pasamos a la simulación de este usando la opción de visualización y creando un HMI pertinente 
 
 ### Simulación con un HMI 
+
 
 
 

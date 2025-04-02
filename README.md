@@ -199,6 +199,7 @@ Gracias a este proceso, el sistema automatizado pudo ser ejecutado en el Arduino
 
 
 ### Diagrama Ladder 
+El diagrama Ladder implementado en OpenPLC se encuentra a continuación:
 [PLC.pdf](https://github.com/user-attachments/files/19561197/PLC.pdf)
 
 

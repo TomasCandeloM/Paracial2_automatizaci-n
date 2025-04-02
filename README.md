@@ -31,9 +31,9 @@ En este documento, se detallará el proceso de ideación, diseño e implementaci
 # Diseño del circuito lógico para el proceso automatizado 
 
 ## Diseño Lógico 
-Para el diseño lógico de la solución lo primero que se hizo fue la definición de las posibles variables necesarias a implementar para posteriormente implementarlas en un diagrama secuencial. En total se realizaron 2 definiciones de variables, la inicial sirvió para definir los requerimientos mínimos que tendría nuestro proyecto, para poder pasar a CODESYS y verificar si este primer borrador de variables cumpliese con el funcionamiento. 
+Para el diseño lógico de la solución lo primero que se hizo fue la definición de las posibles variables necesarias a implementar para posteriormente implementarlas en un diagrama secuencial. En total se realizaron 2 definiciones de variables, la inicial sirvió para definir los requerimientos mínimos que tendría nuestro proyecto, para poder pasar a codesys y verificar si este primer borrador de variables cumpliese con el funcionamiento. 
 
-Una vez se implemento en CODESYS a cusa de que hacían falta variables necesarias para la implementación de la solución se realizo una actualización de esta lista de variables con todas las variables que ya se tenían y las que tuvieron que ser creadas, tanto para el funcionamiento real de la solución, como para la simulación que posteriormente seria realizada en CODESYS a través de un HMI. 
+Una vez se implemento en codesys a cusa de que hacían falta variables necesarias para la implementación de la solución se realizo una actualización de esta lista de variables con todas las variables que ya se tenían y las que tuvieron que ser creadas, tanto para el funcionamiento real de la solución, como para la simulación que posteriormente seria realizada en codesys a través de un HMI. 
 
 La lista de variables final que se utilizaron en nuestra solución fueron las siguientes:
 
@@ -126,51 +126,51 @@ Después de este último proceso, el sistema se reinicia y la secuencia comienza
 
 ### Diseño Ladder
 
-Ahora que se realizaron estos dos diagramas para el diseño de la solución se puede hacer un cambio de lógica para representar el sistema en una lógica Ladder, para esto simplemente tomamos los pasos, condiciones, estados y resultados de cada uno de los procesos definidos en el diagrama secuencial y luego pasarlo a código Ladder para asi poder implementarlo en CODESYS y hacer su simulación y animación en el HMI del mismo. 
+Ahora que se realizaron estos dos diagramas para el diseño de la solución se puede hacer un cambio de lógica para representar el sistema en una lógica Ladder, para esto simplemente tomamos los pasos, condiciones, estados y resultados de cada uno de los procesos definidos en el diagrama secuencial y luego pasarlo a código Ladder para asi poder implementarlo en codesys y hacer su simulación y animación en el HMI del mismo. 
 
-## Implementación en CODESYS
+## Implementación en codesys
 
-na vez el Ladder esta listo se realizó la implementación y simulación del diseño usado CODESYS, para este apartado se realizaron las actividades de e esquemático del Ladder y luego la simulación del mismo con un HMI que muestre su funcionamiento a través de una animación.
+na vez el Ladder esta listo se realizó la implementación y simulación del diseño usado codesys, para este apartado se realizaron las actividades de e esquemático del Ladder y luego la simulación del mismo con un HMI que muestre su funcionamiento a través de una animación.
 
 ### Esquemático Ladder del diseño
 
 Una vez estamos en el software en el plano PLC_PRG se añadió el primer contacto para habilitar la pestaña de variables globales y asi crear todas las variables que presentamos en el excel con su respectivo tipo de variable. 
 
-Con las variables configuradas en el CODESYS se construyó el esquemático siguiendo los procesos definidos en el diagrama secuencial, para este se realizaron un total de 23 redes para el completo funcionamiento tanto para la lógica como para el HMI que sera implementado más adelante. 
+Con las variables configuradas en el codesys se construyó el esquemático siguiendo los procesos definidos en el diagrama secuencial, para este se realizaron un total de 23 redes para el completo funcionamiento tanto para la lógica como para el HMI que sera implementado más adelante. 
 
 Para la primer red si implemento el proceso S000 encargado del reinicio de todos los actuadores del sistema y las variables del HMI encargados de mostrar que tanto el agua como el café han sido depositados en el mezclador
 
-![Primera red del esquemático Ladder en CODESYS](Images/Red1_CODESYS.png)
+![Primera red del esquemático Ladder en codesys](Images/Red1_codesys.png)
 
 Las siguientes 3 redes se encargan de asignar la funcionalidad de los sensores del agua, el café y el vaso ya que en el HMI no tenemos sensores para representar su funcionalidad, entonces usaremos switches para representar si están sensando algo o no
 
-![Redes 2, 3 y 4 del esquemático Ladder en CODESYS](Images/Red_234_CODESYS.png)
+![Redes 2, 3 y 4 del esquemático Ladder en codesys](Images/Red_234_codesys.png)
 
 Ahora que tenemos los estados de los sensores configurados se configuro el esquemático de estos sensores, donde cuando sensan que hay contenido en sus respectivos tanques activa sus leds y relés. 
 
-![Redes 5, 6 y 7 del esquemático Ladder en CODESYS](Images/Red_567_CODESYS.png)
+![Redes 5, 6 y 7 del esquemático Ladder en codesys](Images/Red_567_codesys.png)
 
 Las siguientes redes son las configuraciones iniciales finales encargadas de activar el relé de preparado para iniciar el sistema cuando los estados de los relés de los sensores cumplen con su condición, iniciar el relé de encendido cuando el sistema esta listo y el botón de encendido se acciona con un flanco de subida y el reinicio de todos los estados cuando detecta un flanco de subida en el botón de stop
 
-![Redes 8, 9 y 10 del esquemático Ladder en CODESYS](Images/Red_8910_CODESYS.png)
+![Redes 8, 9 y 10 del esquemático Ladder en codesys](Images/Red_8910_codesys.png)
 
 La siguiente red sera para el HMI donde representara la acción de retirar el vaso del sistema, lo cual reinicia completamente el sistema
 
-![Rede 11 del esquemático Ladder en CODESYS](Images/Red_11_CODESYS.png)
+![Rede 11 del esquemático Ladder en codesys](Images/Red_11_codesys.png)
 
 En la siguiente secuencia de bloques podemos ver representado los procesos S004, S005 y S006 que corresponde a pasar el agua al tanque de mezclado por medio de un timer y luego activar el proceso del café cuando el timer del agua termina, cuando el timer del café termina prepara el proceso de mezcla. 
 
-![Redes 12, 13, 14, 15 y 16 del esquemático Ladder en CODESYS](Images/Red_12_16_CODESYS.png)
+![Redes 12, 13, 14, 15 y 16 del esquemático Ladder en codesys](Images/Red_12_16_codesys.png)
 
 Las siguientes 3 redes corresponden al proceso S007 y S008 encargados del proceso de dispensar la mezcla en el vaso, tenemos primero el contador del proceso de mezcla el cual una vez termina reinicia los estados del HMI del tanque de mezcla y termina el timer, con el timer terminado la siguiente red se encarga de dar inicio al proceso de dispensado, la ultima red cuenta con el timer de dispensado el cual dará paso a la fase de finalización y conteo
 
-![Redes 17, 18 y 19 del esquemático Ladder en CODESYS](Images/Red_17_19_CODESYS.png)
+![Redes 17, 18 y 19 del esquemático Ladder en codesys](Images/Red_17_19_codesys.png)
 
 Finalmente tenemos las redes encargadas del proceso de finalización del sistema, donde en la primera tenemos el reinicio del actuador del dispensador y la activación del relé DONE, este relé activara los indicadores de que finalizo el proceso y activa el relé del contador, donde este ultimo aumentara en uno el conteo de vasos preparados cuando recibe un flanco de subida. Por ultimo, la red 24 unicamente tiene la configuración del botón reset del contador, para mostrar la funcionalidad de reinicio cada 24 horas del mismo. 
 
-![Redes 20, 21, 22, 23 y 24 del esquemático Ladder en CODESYS](Images/Red_20_24_CODESYS.png)
+![Redes 20, 21, 22, 23 y 24 del esquemático Ladder en codesys](Images/Red_20_24_codesys.png)
 
-Con esto terminaríamos el esquemático del Ladder dentro del CODESYS, ahora pasamos a la simulación de este usando la opción de visualización y creando un HMI pertinente 
+Con esto terminaríamos el esquemático del Ladder dentro del codesys, ahora pasamos a la simulación de este usando la opción de visualización y creando un HMI pertinente 
 
 ### Simulación con un HMI 
 
@@ -186,13 +186,13 @@ En este podemos ver los 3 tanques en orden según como se irán llenando o dispe
 Una vez el de agua termino de llenarse empieza a dispensar el de café durante 3 segundos, como se ve en la imagen
 
 ## Implementación del sistema en OpenPLC
-Para la implementación del sistema en OpenPLC, se replicó el diseño previamente desarrollado en CODESYS utilizando lenguaje Ladder (LD). El objetivo de esta etapa fue adaptar la lógica de control para su ejecución en un Arduino, asegurando el correcto funcionamiento de los sensores y actuadores reales.
+Para la implementación del sistema en OpenPLC, se replicó el diseño previamente desarrollado en codesys utilizando lenguaje Ladder (LD). El objetivo de esta etapa fue adaptar la lógica de control para su ejecución en un Arduino, asegurando el correcto funcionamiento de los sensores y actuadores reales.
 
 **Proceso de Implementación**
 
 1.	**Conversión del código Ladder**
 
-- Se trasladó la lógica desarrollada en CODESYS a OpenPLC, manteniendo la estructura y funcionalidad original.
+- Se trasladó la lógica desarrollada en codesys a OpenPLC, manteniendo la estructura y funcionalidad original.
 
 - Se verificó que las condiciones, temporizadores y relés conservaran su comportamiento esperado.
 
@@ -203,7 +203,7 @@ Para la implementación del sistema en OpenPLC, se replicó el diseño previamen
 - Una vez configurado el programa, se cargó el proyecto en OpenPLC y se compiló para su ejecución en el Arduino.
 - Se realizaron pruebas de funcionamiento para comprobar que todas las señales se activaban en el orden correcto.
 	
-Gracias a este proceso, el sistema automatizado pudo ser ejecutado en el Arduino utilizando OpenPLC, manteniendo la lógica de control definida originalmente en CODESYS.
+Gracias a este proceso, el sistema automatizado pudo ser ejecutado en el Arduino utilizando OpenPLC, manteniendo la lógica de control definida originalmente en codesys.
 
 
 ### Diagrama Ladder 

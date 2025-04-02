@@ -266,17 +266,15 @@ Para el montaje en físico se utilizaron como tal los sensores y actuadores que 
 
 - Leds y Botones: Estos elementos fueron utilizados para mostrar diferentes indicadores y accionar o detener el sistema cuando la lógica del mismo lo requiriera, concretamente se usaron botones TTP223 para encender y parar el sistema y dos leds para indicar que el sistema esta encendido y cuando se ha terminado el proceso.
 
-![Botones TTP223 usados en el montaje](Images\boton.png)
+![Botones TTP223 usados en el montaje](Images/boton.png)
 
 Todos estos materiales fueron conectados a través del Arduino y una protoboard alimentada a 12 voltios a través de la conexión Jack del Arduino UNO, a excepción de los puente H que están alimentados por una pila de 9 voltios para que puedan cumplir con esa función de dar mayor corriente a los motores. 
 
-Una vez teníamos los materiales, procedimos a realizar un primer montaje de la maqueta, donde se probo el funcionamiento de los sensores y la lógica inicial del estado de los sensores para poder iniciar el sistema. Estos sensores se configuraron de modo que los encargados de detectar los tanques funcionen con lógica negativa mientras que el del vaso con lógica positiva, estas características del diseño se dieron después de multiples pruebas y error con los sensores y su comportamiento. 
-
-![primer montaje físico con Leds](Images/montaje_LEDS.png)
+Una vez teníamos los materiales, procedimos a realizar un primer montaje de la maqueta, donde se probo el funcionamiento de los sensores y la lógica inicial del estado de los sensores para poder iniciar el sistema. Estos sensores se configuraron de modo que los encargados de detectar los tanques funcionen con lógica negativa mientras que el del vaso con lógica positiva, estas características del diseño se dieron después de multiples pruebas y error con los sensores y su comportamiento.
 
 Para los actuadores se probo inicialmente con Leds para poder verificar que la lógica estaba funcionando correctamente, lo cual fue demostrado en el siguiente video: 
 
-sdffdsa
+[![Montaje fisico con LED's](Images/montaje_LEDS.png)](https://youtu.be/i0BBa7dTyEw)
 
 Para los tanques se utilizaron diferentes frascos donde se le abrieron huecos a las tapas para poder permitir el paso de los tubos por los que pasaría el agua una vez las bombas fuesen activadas, ademas para el tanque de mezclado se añadió un hueco pequeño adicional en el cual iría el motor para el proceso de mezcla como tal, la adecuación de estos tanque se puede ver en las siguientes imágenes: 
 
@@ -298,6 +296,7 @@ Para la realización de la maqueta de la cafetera, se utilizó una caja de cart�
 
 Inicialmente, se elaboró un bosquejo en la parte frontal de la caja para determinar la ubicación de los botones, LEDs, sensores y la manguera de salida del café. Una vez definida la distribución de estos elementos, se procedió a realizar los cortes necesarios en la caja para su correcta colocación, finalmente se obtuvo la distribución y el diseño que se puede observar en la imagen:
 
+![Vista frontal de la maqueta](Images/maqueta_frontal.jpg)
 
 
 ### Montaje de Componentes

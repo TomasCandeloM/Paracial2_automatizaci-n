@@ -3,10 +3,11 @@
         "actuador",
         "actuadores",
         "codesys",
-        "dispensarlo",
         "CODESYS",
+        "dispensarlo",
+        "protoboard",
         "secuencialidad",
         "sensan",
         "sensando"
-    ]
+]
 }

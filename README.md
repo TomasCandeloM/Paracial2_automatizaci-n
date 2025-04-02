@@ -237,15 +237,69 @@ El diagrama Ladder implementado en OpenPLC se encuentra a continuación:
 
 # Validación con Equipo Real y OpenPLC
 
-
-
-
-
+Una vez verificado y configurado el entorno del openPLC para poder quemar nuestro código en el Arduino uno, se realizó la quema de este para empezar con la validación final en físico. 
 
 ### Montaje Físico
 
+Para el montaje en físico se utilizaron como tal los sensores y actuadores que permitieran llevar a cabo el paso de contenido de un contenedor a otro, para ello los principales materiales que se consiguieron para la implementación fueron: 
 
+- Sensores infrarrojos de Arduino: Estos sensores fueron usados para los sensores de detección del contenido del tanque de agua y de café, además de que también se uso para verificar que el vaso estuviese en su sitio al momento de empezar el sistema.
+
+![Sensor infrarrojo Arduino](Images/sensor_infra.png)
+
+- Mini Bombas de agua sumergibles: Estas bombas fueron usadas para que los tanques pudieran transferir su contenido a otro recipiente, ya sea al tanque de mezclado o al vaso como tal, cabe resaltar que pasar efectos prácticos de la solución física, el tanque de cafe también fue manejado como un liquido y no un solido. 
+
+![Mini bomba de agua](Images/bomba_agua.png)
+
+- Motor reductor: Este fue utilizado para el actuador de la mezcla, encargado de revolver los líquidos que llegan a su respectivo tanque, inicialmente teníamos un motor comercial DC pero se cambio debido a que no tenia la suficiente fuerza para poder mover el ventilador en el recipiente de mezclado.
+
+![Motor reductor](Images/motor_reductor.png)
+
+- Punte H: Estos fueron utilizados para poder proveer a las bombas y el motor con la suficiente corriente y voltaje para que puedan funcionar dentro de la lógica de la solución, esto debido a que, como veremos más adelante, el sistema conectado a la misma fuente de poder no era suficiente para todos los input y outputs involucrados. 
+
+![Puente H usado para las bombas y el motor](Images/Puente_h.png)
+
+- Leds y Botones: Estos elementos fueron utilizados para mostrar diferentes indicadores y accionar o detener el sistema cuando la lógica del mismo lo requiriera, concretamente se usaron botones TTP223 para encender y parar el sistema y dos leds para indicar que el sistema esta encendido y cuando se ha terminado el proceso.
+
+![Botones TTP223 usados en el montaje](Images\boton.png)
+
+Todos estos materiales fueron conectados a través del Arduino y una protoboard alimentada a 12 voltios a través de la conexión Jack del Arduino UNO, a excepción de los puente H que están alimentados por una pila de 9 voltios para que puedan cumplir con esa función de dar mayor corriente a los motores. 
+
+Una vez teníamos los materiales, procedimos a realizar un primer montaje de la maqueta, donde se probo el funcionamiento de los sensores y la lógica inicial del estado de los sensores para poder iniciar el sistema. Estos sensores se configuraron de modo que los encargados de detectar los tanques funcionen con lógica negativa mientras que el del vaso con lógica positiva, estas características del diseño se dieron después de multiples pruebas y error con los sensores y su comportamiento. 
+
+![primer montaje físico con Leds](Images/montaje_LEDS.png)
+
+Para los actuadores se probo inicialmente con Leds para poder verificar que la lógica estaba funcionando correctamente, lo cual fue demostrado en el siguiente video: 
+
+sdffdsa
+
+Para los tanques se utilizaron diferentes frascos donde se le abrieron huecos a las tapas para poder permitir el paso de los tubos por los que pasaría el agua una vez las bombas fuesen activadas, ademas para el tanque de mezclado se añadió un hueco pequeño adicional en el cual iría el motor para el proceso de mezcla como tal, la adecuación de estos tanque se puede ver en las siguientes imágenes: 
+
+![Tanques de agua y de cafe en físico](Images/tanques_agua_cafe.png)
+
+![Tanque de mezclado en físico](Images/tanques_mezcla.png)
+
+Al momento de implementar las bombas y el motor, estos funcionaron por separado de la manera adecuada, pero al momento de hacer una prueba conectándolos al sistema completo estos se robaban mucha corriente, tanta que no era posible activar absolutamente ninguna de las salidas del Arduino. 
+
+Como consecuencia de esto es que se implemento el puente H el cual fue conectado a las salidas del Arduino para generar dicha potenciación de corriente para poder accionar las bombas y el motor. 
+
+Una vez todo esto estuvo conectado sobre la protoboard se realizo una prueba del sistema donde las bombas funcionaron de manera adecuada y en los tiempos correspondientes a la secuencialidad del sistema, al igual que los indicadores y entradas ya mencionados.
 
 ## Montaje Final
+
+Para la realización de la maqueta de la cafetera, se utilizó una caja de cartón reciclable como estructura principal. En su interior, se incorporó una división para separar el espacio en dos niveles: la parte superior destinada a los tanques y la parte inferior para los circuitos y el tanque mezclador.
+
+### Diseño y Preparación
+
+Inicialmente, se elaboró un bosquejo en la parte frontal de la caja para determinar la ubicación de los botones, LEDs, sensores y la manguera de salida del café. Una vez definida la distribución de estos elementos, se procedió a realizar los cortes necesarios en la caja para su correcta colocación, finalmente se obtuvo la distribución y el diseño que se puede observar en la imagen:
+
+
+
+### Montaje de Componentes
+
+Con los espacios habilitados, se instalaron los sensores, LEDs y pulsadores en sus respectivas posiciones. Posteriormente, se montaron la protoboard y el Arduino en la parte inferior de la caja. Luego, se colocó la división superior, sobre la cual se dispusieron los tanques. Estos se conectaron con el tanque mezclador, ubicado en la parte inferior, asegurando un flujo adecuado del líquido.
+
+
+
 
  
